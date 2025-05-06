@@ -1,0 +1,34 @@
+devops-monitoring-project/
+├── grafana/
+│   ├── grafana-configmap.yaml
+│   ├── grafana-deployment.yaml
+│   ├── grafana-service.yaml
+│   └── dashboard.json           # Optional: Preconfigured Grafana dashboard
+│
+├── prometheus/
+│   ├── prometheus-deployment.yaml
+│   ├── prometheus-configmap.yaml
+│   ├── prometheus-service.yaml
+│   ├── alertmanager-config.yaml
+│   └── alertmanager-deployment.yaml
+│
+├── app/
+│   ├── Dockerfile
+│   ├── metrics.py               # Python app exposing Prometheus metrics
+│   ├── requirements.txt
+│   └── app-deployment.yaml
+│
+├── namespaces/
+│   ├── mymonitoring-namespace.yaml
+│   ├── prometheus-namespace.yaml
+│   └── app-namespace.yaml       # Optional if your app runs in its own namespace
+│
+├── k8s-ingress/                 # Optional if using Ingress
+│   └── ingress.yaml
+│
+├── scripts/
+│   ├── deploy-all.sh            # Script to apply everything
+│   └── cleanup.sh               # Script to delete all resources
+│
+├── README.md
+└── VALIDATION-CHECKLIST.md      # Your validation tasks

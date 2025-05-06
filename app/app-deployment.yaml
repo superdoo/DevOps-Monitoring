@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app
+  namespace: app-monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-app
+  template:
+    metadata:
+      labels:
+        app: python-app
+    spec:
+      containers:
+        - name: python-app
+          image: python-app:latest  # Local image in Minikube's Docker environment
+          imagePullPolicy: Never     # Ensure Kubernetes uses the local image
+          ports:
+            - containerPort: 5000
+            - containerPort: 8000

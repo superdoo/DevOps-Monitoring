@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: mymonitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana
+          env:
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              value: "admin"  # Default admin password (can be changed in the UI)
+            - name: GF_SECURITY_ADMIN_USER
+              value: "admin"  # Default admin user (can be changed in the UI)
+            - name: GF_PATHS_CONFIG
+              value: /etc/grafana/grafana.ini  # Pointing to the custom config file
+          volumeMounts:
+            - name: grafana-config-volume
+              mountPath: /etc/grafana  # Mounting the whole directory
+      volumes:
+        - name: grafana-config-volume
+          configMap:
+            name: grafana-config  # Referencing the ConfigMap created above
